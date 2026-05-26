@@ -1,0 +1,6 @@
+{
+  "name": "AI 會議記錄生成與翻譯工具",
+  "description": "貼上會議逐字稿，一鍵快速生成結構化的繁體中文會議摘要、決議與待辦清單，並支援英、日、韓等語言的對照翻譯。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
