@@ -1,4 +1,8 @@
 import { GoogleGenAI } from "@google/genai";
+import dotenv from "dotenv";
+
+dotenv.config({ path: ".env.local" });
+dotenv.config();
 
 // Traditional Chinese system instruction for standard high-quality business summaries and translation
 const SYSTEM_INSTRUCTIONS = `
@@ -89,7 +93,7 @@ ${transcript}
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "nvidia/nemotron-mini-4b-instruct",
+          model: "meta/llama-4-maverick-17b-128e-instruct",
           messages: [
             { role: "system", content: SYSTEM_INSTRUCTIONS },
             { role: "user", content: prompt }

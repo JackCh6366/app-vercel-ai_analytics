@@ -203,7 +203,7 @@ export default function App() {
 
         {/* Sidebar Info footer */}
         <div className="pt-8 border-t border-zinc-800 text-[11px] text-zinc-500 font-mono space-y-1 mt-8 lg:mt-0">
-          <div>ENGINE: {provider === "gemini" ? "GEMINI_2.5_LITE" : "NVIDIA_NEMOTRON"}</div>
+          <div>ENGINE: {provider === "gemini" ? "GEMINI_2.5_LITE" : "META_LLAMA_4_17B"}</div>
           <div>LOCALE: ZH_TW_TAIWAN</div>
           <div className="text-[10px] text-emerald-500 flex items-center gap-1.5 mt-1">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -361,11 +361,11 @@ export default function App() {
                       className="w-full text-xs p-2.5 bg-white border border-zinc-200 rounded-sm focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 outline-none text-zinc-800 font-sans"
                     >
                       <option value="gemini">Google Gemini (2.5 Flash Lite)</option>
-                      <option value="nvidia">NVIDIA (Nemotron Mini 4B)</option>
+                      <option value="nvidia">NVIDIA (Meta Llama 4 17B)</option>
                     </select>
 
                     <p className="text-[10px] text-zinc-400 font-serif italic leading-relaxed pt-1.5">
-                      * {provider === "gemini" ? "採用最新 Gemini 2.5 Flash Lite，兼具超快速度與優異的長文總結推理能力。" : "採用 NVIDIA Nemotron Mini 4B 模型，提供高效率、極致輕量之精準指令遵循體驗。"}
+                      * {provider === "gemini" ? "採用最新 Gemini 2.5 Flash Lite，兼具超快速度與優異的長文總結推理能力。" : "採用 Meta Llama 4 Maverick 17B 模型，提供極速、高智慧的文字推理與完美流暢的內容寫作。"}
                     </p>
                   </div>
                 </div>
@@ -557,7 +557,7 @@ export default function App() {
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                 <span className="uppercase tracking-widest text-zinc-400">
-                  {provider === "gemini" ? "Gemini 2.5 Lite Active" : "NVIDIA Nemotron Active"}
+                  {provider === "gemini" ? "Gemini 2.5 Lite Active" : "Meta Llama 4 Active"}
                 </span>
               </div>
               <div className="hidden sm:block h-4 w-px bg-zinc-755 bg-zinc-750"></div>
