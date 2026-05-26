@@ -24,6 +24,7 @@ export default function App() {
   const [transcript, setTranscript] = useState("");
   const [targetLanguage, setTargetLanguage] = useState("none");
   const [styleOption, setStyleOption] = useState("standard");
+  const [provider, setProvider] = useState("gemini");
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState("");
   const [error, setError] = useState("");
@@ -65,7 +66,7 @@ export default function App() {
     setResult("");
 
     try {
-      const response = await fetch("/api/summarize", {
+      const response = await fetch("/api/generate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -74,6 +75,7 @@ export default function App() {
           transcript,
           targetLanguage,
           styleOption,
+          provider,
         }),
       });
 
@@ -201,7 +203,7 @@ export default function App() {
 
         {/* Sidebar Info footer */}
         <div className="pt-8 border-t border-zinc-800 text-[11px] text-zinc-500 font-mono space-y-1 mt-8 lg:mt-0">
-          <div>ENGINE: GEMINI_3.5_FLASH</div>
+          <div>ENGINE: {provider === "gemini" ? "GEMINI_2.5_LITE" : "NVIDIA_NEMOTRON"}</div>
           <div>LOCALE: ZH_TW_TAIWAN</div>
           <div className="text-[10px] text-emerald-500 flex items-center gap-1.5 mt-1">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -288,7 +290,7 @@ export default function App() {
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   
                   {/* Summary Type radio style */}
                   <div className="space-y-2">
@@ -343,6 +345,27 @@ export default function App() {
 
                     <p className="text-[10px] text-zinc-400 font-serif italic leading-relaxed pt-1.5">
                       * 勾選後，AI 會自動在中文會議記錄的尾端附上針對主題與大綱的精美商務語言對講。
+                    </p>
+                  </div>
+
+                  {/* AI Provider selector */}
+                  <div className="space-y-2">
+                    <span className="block text-[11px] font-bold text-zinc-500 uppercase tracking-wider font-mono flex items-center gap-1">
+                      <Sparkles className="w-3 h-3 text-[#FF6B35]" />
+                      AI PROVIDER / 服務商選擇
+                    </span>
+                    
+                    <select
+                      value={provider}
+                      onChange={(e) => setProvider(e.target.value)}
+                      className="w-full text-xs p-2.5 bg-white border border-zinc-200 rounded-sm focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 outline-none text-zinc-800 font-sans"
+                    >
+                      <option value="gemini">Google Gemini (2.5 Flash Lite)</option>
+                      <option value="nvidia">NVIDIA (Nemotron Mini 4B)</option>
+                    </select>
+
+                    <p className="text-[10px] text-zinc-400 font-serif italic leading-relaxed pt-1.5">
+                      * {provider === "gemini" ? "採用最新 Gemini 2.5 Flash Lite，兼具超快速度與優異的長文總結推理能力。" : "採用 NVIDIA Nemotron Mini 4B 模型，提供高效率、極致輕量之精準指令遵循體驗。"}
                     </p>
                   </div>
                 </div>
@@ -533,7 +556,9 @@ export default function App() {
             <div className="flex flex-wrap items-center gap-4 lg:gap-6 text-xs font-mono">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="uppercase tracking-widest text-zinc-400">Gemini 3.5 Flash Active</span>
+                <span className="uppercase tracking-widest text-zinc-400">
+                  {provider === "gemini" ? "Gemini 2.5 Lite Active" : "NVIDIA Nemotron Active"}
+                </span>
               </div>
               <div className="hidden sm:block h-4 w-px bg-zinc-755 bg-zinc-750"></div>
               
